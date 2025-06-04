@@ -178,6 +178,20 @@
 }
 
 /* Mobile Navigation */
+.mobileNavOpen {
+  pointer-events: auto;
+}
+
+.mobileMenuOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: -1;
+  backdrop-filter: blur(2px);
+}
 .mobileNav {
   display: none;
   overflow: hidden;
@@ -212,14 +226,20 @@
   cursor: pointer;
   transition: all 0.3s ease;
   font-weight: 500;
+  /* Ensure buttons work on touch devices */
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
 }
 
-.mobileNavItem:hover {
+.mobileNavItem:hover,
+.mobileNavItem:active,
+.mobileNavItem:focus {
   color: white;
   background: linear-gradient(45deg, var(--gradient-1), var(--gradient-2));
   border-color: transparent;
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+  outline: none;
 }
 
 /* Header Background Animation - Only visible when not scrolled */

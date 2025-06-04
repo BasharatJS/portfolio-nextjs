@@ -29,13 +29,70 @@ const Header: React.FC = () => {
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
 
+  // Enhanced scroll function with better mobile support
   const scrollToSection = (href: string) => {
-    const element = document.querySelector(href)
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' })
+    try {
+      // Close mobile menu first
       setIsMobileMenuOpen(false)
+
+      // Add small delay to allow menu animation to complete
+      setTimeout(() => {
+        const targetId = href.replace('#', '')
+        const element =
+          document.getElementById(targetId) || document.querySelector(href)
+
+        if (element) {
+          // Get header height for offset calculation
+          const headerHeight = 80 // Approximate header height
+          const elementPosition = element.offsetTop - headerHeight
+
+          // Use both scrollIntoView and scrollTo for better compatibility
+          window.scrollTo({
+            top: elementPosition,
+            behavior: 'smooth',
+          })
+
+          // Fallback for older browsers
+          element.scrollIntoView({
+            behavior: 'smooth',
+            block: 'start',
+            inline: 'nearest',
+          })
+        } else {
+          console.warn(`Element with selector "${href}" not found`)
+        }
+      }, 100) // Small delay for menu close animation
+    } catch (error) {
+      console.error('Error scrolling to section:', error)
     }
   }
+
+  // Close mobile menu when clicking outside
+  useEffect(() => {
+    const handleOutsideClick = (event: MouseEvent) => {
+      const target = event.target as HTMLElement
+      if (
+        isMobileMenuOpen &&
+        !target.closest(`.${styles.mobileNav}`) &&
+        !target.closest(`.${styles.mobileMenuButton}`)
+      ) {
+        setIsMobileMenuOpen(false)
+      }
+    }
+
+    if (isMobileMenuOpen) {
+      document.addEventListener('click', handleOutsideClick)
+      // Prevent body scroll when mobile menu is open
+      document.body.style.overflow = 'hidden'
+    } else {
+      document.body.style.overflow = 'unset'
+    }
+
+    return () => {
+      document.removeEventListener('click', handleOutsideClick)
+      document.body.style.overflow = 'unset'
+    }
+  }, [isMobileMenuOpen])
 
   const headerVariants = {
     initial: { y: -100 },
@@ -91,6 +148,8 @@ const Header: React.FC = () => {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.6, delay: 0.2 }}
               className={styles.logo}
+              onClick={() => scrollToSection('#home')}
+              style={{ cursor: 'pointer' }}
             >
               <div className={styles.logoIcon}>
                 <span className="text-white font-bold text-lg">B</span>
@@ -109,6 +168,7 @@ const Header: React.FC = () => {
                   animate="visible"
                   onClick={() => scrollToSection(item.href)}
                   className={styles.navItem}
+                  type="button"
                 >
                   {item.name}
                 </motion.button>
@@ -125,6 +185,7 @@ const Header: React.FC = () => {
                 onClick={toggleTheme}
                 className={styles.themeToggle}
                 aria-label="Toggle theme"
+                type="button"
               >
                 <motion.div
                   animate={{ rotate: theme === 'dark' ? 180 : 0 }}
@@ -142,12 +203,19 @@ const Header: React.FC = () => {
                 transition={{ duration: 0.5, delay: 0.9 }}
                 onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 className={styles.mobileMenuButton}
+                aria-label="Toggle mobile menu"
+                type="button"
               >
-                {isMobileMenuOpen ? (
-                  <X className="w-5 h-5" />
-                ) : (
-                  <Menu className="w-5 h-5" />
-                )}
+                <motion.div
+                  animate={{ rotate: isMobileMenuOpen ? 180 : 0 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  {isMobileMenuOpen ? (
+                    <X className="w-5 h-5" />
+                  ) : (
+                    <Menu className="w-5 h-5" />
+                  )}
+                </motion.div>
               </motion.button>
             </div>
           </div>
@@ -159,28 +227,53 @@ const Header: React.FC = () => {
               height: isMobileMenuOpen ? 'auto' : 0,
               opacity: isMobileMenuOpen ? 1 : 0,
             }}
-            transition={{ duration: 0.3 }}
-            className={styles.mobileNav}
+            transition={{ duration: 0.3, ease: 'easeInOut' }}
+            className={`${styles.mobileNav} ${
+              isMobileMenuOpen ? styles.mobileNavOpen : ''
+            }`}
           >
-            <div className={styles.mobileNavContent}>
+            <motion.div
+              className={styles.mobileNavContent}
+              initial={false}
+              animate={{
+                y: isMobileMenuOpen ? 0 : -20,
+                opacity: isMobileMenuOpen ? 1 : 0,
+              }}
+              transition={{ duration: 0.3, delay: isMobileMenuOpen ? 0.1 : 0 }}
+            >
               {menuItems.map((item, index) => (
                 <motion.button
                   key={item.name}
-                  initial={{ opacity: 0, x: -20 }}
+                  initial={false}
                   animate={{
                     opacity: isMobileMenuOpen ? 1 : 0,
                     x: isMobileMenuOpen ? 0 : -20,
                   }}
-                  transition={{ delay: index * 0.1 }}
+                  transition={{
+                    delay: isMobileMenuOpen ? index * 0.05 : 0,
+                    duration: 0.3,
+                  }}
                   onClick={() => scrollToSection(item.href)}
                   className={styles.mobileNavItem}
+                  type="button"
                 >
                   {item.name}
                 </motion.button>
               ))}
-            </div>
+            </motion.div>
           </motion.nav>
         </div>
+
+        {/* Mobile Menu Overlay */}
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className={styles.mobileMenuOverlay}
+            onClick={() => setIsMobileMenuOpen(false)}
+          />
+        )}
       </motion.header>
     </>
   )
