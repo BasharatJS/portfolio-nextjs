@@ -1,0 +1,396 @@
+/* Header.module.css - Fixed without white line */
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  transition: all 0.3s ease;
+  padding: 1.5rem 0;
+  background: transparent;
+}
+
+.headerScrolled {
+  padding: 1rem 0;
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  background: rgba(255, 255, 255, 0.95);
+  /* Removed border-bottom that was causing white line */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme='dark'] .headerScrolled {
+  background: rgba(15, 23, 42, 0.95);
+  /* Removed border-bottom for dark theme too */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.headerContent {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* Logo Section */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.logoIcon {
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 0.5rem;
+  background: linear-gradient(45deg, var(--gradient-1), var(--gradient-2));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logoText {
+  font-size: 1.25rem;
+  font-weight: 700;
+  background: linear-gradient(45deg, var(--gradient-1), var(--gradient-2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Desktop Navigation */
+.nav {
+  display: none;
+  align-items: center;
+  gap: 2rem;
+}
+
+.navItem {
+  position: relative;
+  color: var(--text-secondary);
+  background: none;
+  border: none;
+  font-weight: 500;
+  cursor: pointer;
+  padding: 0.5rem 0;
+  transition: color 0.3s ease;
+}
+
+.navItem:hover {
+  color: var(--accent-primary);
+}
+
+.navItem::after {
+  content: '';
+  position: absolute;
+  bottom: -0.25rem;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(45deg, var(--gradient-1), var(--gradient-2));
+  transition: width 0.3s ease;
+}
+
+.navItem:hover::after {
+  width: 100%;
+}
+
+/* Controls Section */
+.controls {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.themeToggle {
+  width: 50px;
+  height: 26px;
+  background: var(--border-color);
+  border-radius: 13px;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: none;
+  padding: 0;
+  /* overflow: hidden; */
+}
+
+.themeToggle::before {
+  content: '';
+  position: absolute;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, var(--gradient-1), var(--gradient-2));
+  top: 2px;
+  left: 2px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme='dark'] .themeToggle::before {
+  transform: translateX(24px);
+}
+
+.themeIcon {
+  position: absolute;
+  top: 50%;
+  right: 2px;
+  transform: translateY(-50%);
+  width: 22px;
+  height: 22px;
+  top: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  z-index: 2;
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+[data-theme='dark'] .themeIcon {
+  right: 26px;
+}
+
+.themeIcon svg {
+  width: 18px;
+  height: 18px;
+}
+
+.mobileMenuButton {
+  display: none;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+  background: var(--bg-secondary);
+  border: none;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.mobileMenuButton:hover {
+  background: var(--border-color);
+}
+
+/* Mobile Navigation */
+.mobileNav {
+  display: none;
+  overflow: hidden;
+  margin-top: 1rem;
+}
+
+.mobileNavContent {
+  padding: 1rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.mobileNavItem {
+  display: block;
+  width: 100%;
+  text-align: left;
+  padding: 0.75rem 1rem;
+  border-radius: 0.5rem;
+  color: var(--text-secondary);
+  background: none;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.mobileNavItem:hover {
+  color: var(--accent-primary);
+  background: var(--bg-secondary);
+}
+
+/* Header Background Animation - Only visible when not scrolled */
+.headerBackground {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: -1;
+  overflow: hidden;
+  opacity: 1;
+  transition: opacity 0.3s ease;
+}
+
+.headerBackgroundHidden {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.headerFloatingShapes {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.headerShape {
+  position: absolute;
+  border-radius: 50%;
+  background: linear-gradient(45deg, var(--gradient-1), var(--gradient-2));
+  opacity: 0.08;
+  animation: headerFloat 15s infinite ease-in-out;
+}
+
+.headerShape1 {
+  width: 120px;
+  height: 120px;
+  top: 10%;
+  left: 15%;
+  animation-delay: 0s;
+}
+
+.headerShape2 {
+  width: 80px;
+  height: 80px;
+  top: 20%;
+  right: 20%;
+  animation-delay: -3s;
+  background: linear-gradient(45deg, var(--gradient-2), var(--gradient-3));
+}
+
+.headerShape3 {
+  width: 150px;
+  height: 150px;
+  top: 5%;
+  left: 60%;
+  animation-delay: -7s;
+  background: linear-gradient(45deg, var(--gradient-3), var(--gradient-1));
+}
+
+@keyframes headerFloat {
+  0%,
+  100% {
+    transform: translateY(0px) translateX(0px) rotate(0deg);
+  }
+  33% {
+    transform: translateY(-20px) translateX(20px) rotate(120deg);
+  }
+  66% {
+    transform: translateY(20px) translateX(-20px) rotate(240deg);
+  }
+}
+
+.headerGradientMesh {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(
+      circle at 20% 30%,
+      var(--gradient-1) 0%,
+      transparent 40%
+    ),
+    radial-gradient(circle at 80% 10%, var(--gradient-2) 0%, transparent 40%);
+  opacity: 0.02;
+  animation: headerMeshFloat 20s ease-in-out infinite;
+}
+
+@keyframes headerMeshFloat {
+  0%,
+  100% {
+    transform: scale(1) rotate(0deg);
+  }
+  50% {
+    transform: scale(1.05) rotate(180deg);
+  }
+}
+
+/* Responsive Design */
+@media (min-width: 768px) {
+  .nav {
+    display: flex;
+  }
+}
+
+@media (max-width: 767px) {
+  .mobileMenuButton {
+    display: block;
+  }
+
+  .mobileNav {
+    display: block;
+  }
+
+  .container {
+    padding: 0 1rem;
+  }
+
+  .logo {
+    gap: 0.25rem;
+  }
+
+  .logoIcon {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .logoText {
+    font-size: 1.125rem;
+  }
+
+  .headerShape1 {
+    width: 80px;
+    height: 80px;
+  }
+
+  .headerShape2 {
+    width: 60px;
+    height: 60px;
+  }
+
+  .headerShape3 {
+    width: 100px;
+    height: 100px;
+  }
+}
+
+@media (max-width: 480px) {
+  .headerContent {
+    gap: 0.5rem;
+  }
+
+  .controls {
+    gap: 0.5rem;
+  }
+
+  .themeToggle {
+    width: 44px;
+    height: 24px;
+  }
+
+  .themeToggle::before {
+    width: 20px;
+    height: 20px;
+  }
+
+  [data-theme='dark'] .themeToggle::before {
+    transform: translateX(20px);
+  }
+
+  .themeIcon {
+    right: 2px;
+    width: 20px;
+    height: 20px;
+  }
+
+  [data-theme='dark'] .themeIcon {
+    right: 22px;
+  }
+
+  .themeIcon svg {
+    width: 16px;
+    height: 16px;
+  }
+}

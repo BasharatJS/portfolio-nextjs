@@ -1,0 +1,1080 @@
+/* Projects.module.css - Horizontal Scroll with Door Animation */
+
+.projectsSection {
+  background: linear-gradient(
+    145deg,
+    var(--bg-primary) 0%,
+    var(--bg-secondary) 30%,
+    var(--bg-primary) 70%,
+    var(--bg-secondary) 100%
+  );
+  padding: 120px 20px;
+  position: relative;
+  overflow: hidden;
+  min-height: 100vh;
+}
+
+/* Container */
+.projectsContainer {
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 10;
+}
+
+/* Dynamic Background Elements */
+.projectsBg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Matrix Rain Effect */
+.matrixRain {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.matrixColumn {
+  position: absolute;
+  width: 2px;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    transparent,
+    var(--gradient-1),
+    transparent
+  );
+  opacity: 0.3;
+  animation: matrixFall 8s linear infinite;
+}
+
+.matrix1 {
+  left: 10%;
+  animation-delay: 0s;
+  background: linear-gradient(180deg, transparent, #00ff41, transparent);
+}
+
+.matrix2 {
+  left: 25%;
+  animation-delay: -2s;
+  background: linear-gradient(180deg, transparent, #0099ff, transparent);
+}
+
+.matrix3 {
+  left: 40%;
+  animation-delay: -4s;
+  background: linear-gradient(180deg, transparent, #ff0066, transparent);
+}
+
+@keyframes matrixFall {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  10% {
+    opacity: 0.3;
+  }
+  90% {
+    opacity: 0.3;
+  }
+  100% {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
+}
+
+/* Floating Devices */
+.floatingDevices {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.floatingDevice {
+  position: absolute;
+  padding: 20px;
+  background: var(--card-bg);
+  border-radius: 50%;
+  border: 2px solid var(--border-color);
+  color: var(--gradient-1);
+  opacity: 0.1;
+  backdrop-filter: blur(10px);
+}
+
+.device1 {
+  top: 15%;
+  left: 10%;
+  color: #3b82f6;
+}
+
+.device2 {
+  top: 25%;
+  right: 20%;
+  color: #8b5cf6;
+}
+
+.device3 {
+  top: 60%;
+  left: 15%;
+  color: #10b981;
+}
+
+.device4 {
+  bottom: 30%;
+  right: 15%;
+  color: #f97316;
+}
+
+.device5 {
+  bottom: 20%;
+  left: 60%;
+  color: #ec4899;
+}
+
+/* Circuit Lines */
+.circuitLines {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.circuitLine {
+  position: absolute;
+  background: var(--gradient-1);
+  opacity: 0.1;
+}
+
+.circuit1 {
+  top: 20%;
+  left: 5%;
+  width: 200px;
+  height: 2px;
+  transform: rotate(30deg);
+  animation: circuitPulse 4s infinite ease-in-out;
+}
+
+.circuit2 {
+  top: 50%;
+  right: 10%;
+  width: 150px;
+  height: 2px;
+  transform: rotate(-45deg);
+  animation: circuitPulse 4s infinite ease-in-out 1s;
+  background: var(--gradient-2);
+}
+
+.circuit3 {
+  bottom: 30%;
+  left: 30%;
+  width: 100px;
+  height: 2px;
+  transform: rotate(60deg);
+  animation: circuitPulse 4s infinite ease-in-out 2s;
+  background: var(--gradient-3);
+}
+
+.circuit4 {
+  top: 70%;
+  right: 40%;
+  width: 120px;
+  height: 2px;
+  transform: rotate(-30deg);
+  animation: circuitPulse 4s infinite ease-in-out 3s;
+  background: var(--gradient-1);
+}
+
+@keyframes circuitPulse {
+  0%,
+  100% {
+    opacity: 0.1;
+    box-shadow: none;
+  }
+  50% {
+    opacity: 0.6;
+    box-shadow: 0 0 20px currentColor;
+  }
+}
+
+/* Glowing Orbs */
+.glowingOrbs {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.glowingOrb {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  filter: blur(40px);
+  opacity: 0.3;
+}
+
+.orb1 {
+  top: 10%;
+  left: 20%;
+  background: radial-gradient(circle, #3b82f6, transparent);
+}
+
+.orb2 {
+  top: 40%;
+  right: 25%;
+  background: radial-gradient(circle, #8b5cf6, transparent);
+}
+
+.orb3 {
+  bottom: 20%;
+  left: 40%;
+  background: radial-gradient(circle, #10b981, transparent);
+}
+
+/* Header Styles */
+.projectsHeader {
+  text-align: center;
+  margin-bottom: 80px;
+  perspective: 1000px;
+  position: relative;
+  z-index: 10;
+}
+
+.projectsIconContainer {
+  margin-bottom: 30px;
+  display: inline-block;
+  transform-style: preserve-3d;
+}
+
+.projectsIcon {
+  font-size: 4.5rem;
+  display: inline-block;
+  filter: drop-shadow(0 8px 16px rgba(0, 0, 0, 0.15));
+}
+
+.projectsTitle {
+  font-size: 4rem;
+  font-weight: 900;
+  margin-bottom: 25px;
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6, #10b981, #f97316);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  letter-spacing: -2px;
+  text-transform: uppercase;
+  position: relative;
+}
+
+.titleUnderline {
+  height: 6px;
+  background: linear-gradient(90deg, #3b82f6, #8b5cf6, #10b981, #f97316);
+  margin: 0 auto 35px;
+  border-radius: 3px;
+  position: relative;
+  overflow: hidden;
+}
+
+.underlineDot {
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background: white;
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 0 3px #3b82f6;
+}
+
+.projectsSubtitle {
+  font-size: 1.4rem;
+  color: var(--text-secondary);
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.7;
+  font-weight: 400;
+}
+
+/* Navigation Controls */
+.projectsControls {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 60px;
+  position: relative;
+  z-index: 10;
+}
+
+.scrollButton {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background: var(--card-bg);
+  border: 2px solid var(--border-color);
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(20px);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.scrollButton:hover {
+  background: var(--gradient-1);
+  color: white;
+  border-color: var(--gradient-1);
+  box-shadow: 0 15px 40px rgba(59, 130, 246, 0.3);
+}
+
+/* Projects Scroll Container */
+.projectsScrollContainer {
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-behavior: smooth;
+  padding: 20px 0 40px;
+  position: relative;
+  z-index: 10;
+}
+
+.projectsScrollContainer::-webkit-scrollbar {
+  height: 8px;
+}
+
+.projectsScrollContainer::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+  border-radius: 4px;
+}
+
+.projectsScrollContainer::-webkit-scrollbar-thumb {
+  background: var(--gradient-1);
+  border-radius: 4px;
+}
+
+.projectsGrid {
+  display: flex;
+  gap: 40px;
+  padding: 0 20px;
+  min-width: max-content;
+}
+
+/* Project Card */
+.projectCard {
+  width: 400px;
+  height: 360px; /* Reduced default height by ~40% (from 600px) */
+  position: relative;
+  perspective: 1000px;
+  transform-style: preserve-3d;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1); /* Smooth height transition */
+}
+
+.projectCard:hover {
+  height: 600px; /* Full height on hover */
+}
+
+/* Card Door (Front Panel) */
+.cardDoor {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--card-bg);
+  border-radius: 20px;
+  border: 2px solid var(--border-color);
+  overflow: hidden;
+  transform-style: preserve-3d;
+  backface-visibility: hidden;
+  z-index: 2;
+}
+
+.doorGradient {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 8px;
+  z-index: 1;
+}
+
+.doorPattern {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.05;
+  pointer-events: none;
+  background-image: radial-gradient(
+    circle at 50% 50%,
+    currentColor 2px,
+    transparent 2px
+  );
+  background-size: 30px 30px;
+  z-index: 1;
+}
+
+.doorContent {
+  position: relative;
+  z-index: 2;
+  padding: 30px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.projectImage {
+  width: 100%;
+  height: 150px; /* Reduced image height to make room for content */
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 15px; /* Reduced margin */
+  background: linear-gradient(135deg, #f8fafc, #e2e8f0);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+[data-theme='dark'] .projectImage {
+  background: linear-gradient(135deg, #1e293b, #334155);
+}
+
+/* Mobile Development Card */
+.mobileDevCard {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mobileScreen {
+  width: 80px;
+  height: 130px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 12px;
+  padding: 8px;
+  box-shadow: 0 8px 32px rgba(102, 126, 234, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.mobileHeader {
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 8px;
+}
+
+.mobileDots {
+  display: flex;
+  gap: 4px;
+}
+
+.mobileDots span {
+  width: 4px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+}
+
+.mobileContent {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 8px;
+  padding: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mobileApp {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+
+.appIcon {
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.appBars {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  width: 100%;
+}
+
+.appBar {
+  height: 4px;
+  background: linear-gradient(90deg, #667eea, #764ba2);
+  border-radius: 2px;
+  opacity: 0.7;
+}
+
+.appBar:nth-child(2) {
+  width: 80%;
+}
+
+.appBar:nth-child(3) {
+  width: 60%;
+}
+
+/* Web Development Card */
+.webDevCard {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.webScreen {
+  width: 120px;
+  height: 100px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 8px;
+  padding: 6px;
+  box-shadow: 0 8px 32px rgba(102, 126, 234, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.webHeader {
+  height: 16px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
+.webDots {
+  display: flex;
+  gap: 3px;
+}
+
+.webDots span {
+  width: 4px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.6);
+  border-radius: 50%;
+}
+
+.webUrl {
+  flex: 1;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.4);
+  border-radius: 4px;
+  margin-left: 4px;
+}
+
+.webContent {
+  flex: 1;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 6px;
+  padding: 8px;
+}
+
+.webLayout {
+  display: flex;
+  gap: 6px;
+  height: 100%;
+}
+
+.webSidebar {
+  width: 25%;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  border-radius: 4px;
+  opacity: 0.8;
+}
+
+.webMain {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.webCard {
+  height: 45%;
+  background: linear-gradient(90deg, #667eea, #764ba2);
+  border-radius: 4px;
+  opacity: 0.7;
+}
+
+.webCard:nth-child(2) {
+  opacity: 0.5;
+}
+
+/* Hover effects for development cards */
+.mobileDevCard:hover .mobileScreen {
+  transform: scale(1.05);
+  box-shadow: 0 12px 48px rgba(102, 126, 234, 0.4);
+}
+
+.webDevCard:hover .webScreen {
+  transform: scale(1.05);
+  box-shadow: 0 12px 48px rgba(102, 126, 234, 0.4);
+}
+
+.mobileScreen,
+.webScreen {
+  transition: all 0.3s ease;
+}
+
+.projectCategory {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--project-color);
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 12px;
+  padding: 6px 12px;
+  background: var(--bg-secondary);
+  border-radius: 20px;
+  border: 1px solid var(--project-color);
+  width: fit-content;
+}
+
+.projectTitle {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 12px;
+  line-height: 1.2;
+}
+
+.projectDescription {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  flex: 1;
+}
+
+/* Card Content (Hidden Behind Door) */
+.cardContent {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--card-bg);
+  border-radius: 20px;
+  border: 2px solid var(--border-color);
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.cardContent::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    135deg,
+    rgba(59, 130, 246, 0.05),
+    rgba(139, 92, 246, 0.05),
+    rgba(16, 185, 129, 0.05)
+  );
+  pointer-events: none;
+  z-index: -1;
+}
+
+.contentHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 20px;
+}
+
+.contentTitle {
+  font-size: 1.4rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  flex: 1;
+}
+
+.projectType {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--project-color);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.contentDescription {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.5; /* Reduced line height */
+  margin-bottom: 15px; /* Reduced margin */
+}
+
+.projectFeatures {
+  margin-bottom: 15px; /* Reduced margin */
+}
+
+.featuresTitle {
+  font-size: 0.85rem; /* Slightly smaller */
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 8px; /* Reduced margin */
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.featuresList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.featureItem {
+  font-size: 0.75rem; /* Smaller font size */
+  color: var(--text-secondary);
+  line-height: 1.3; /* Tighter line height */
+  margin-bottom: 4px; /* Reduced margin */
+}
+
+.technologies {
+  margin-bottom: 20px; /* Reduced margin */
+}
+
+.techTitle {
+  font-size: 0.85rem; /* Slightly smaller */
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 8px; /* Reduced margin */
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.techTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.techTag {
+  padding: 4px 8px;
+  background: var(--bg-secondary);
+  color: var(--text-secondary);
+  border-radius: 12px;
+  font-size: 0.7rem;
+  font-weight: 500;
+  border: 1px solid var(--border-color);
+}
+
+.projectActions {
+  margin-top: auto;
+  display: flex;
+  gap: 12px;
+  padding-top: 15px; /* Added padding to ensure visibility */
+  min-height: 50px; /* Ensure minimum height for buttons */
+}
+
+.actionButton {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 16px; /* Increased padding for better visibility */
+  border-radius: 12px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border: 2px solid var(--border-color);
+  background: var(--bg-secondary);
+  color: var(--text-primary);
+  min-height: 48px; /* Ensure minimum button height */
+}
+
+.actionButton:hover {
+  background: var(--project-color);
+  color: white;
+  border-color: var(--project-color);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+}
+
+.primaryButton {
+  background: var(--project-color);
+  color: white;
+  border-color: var(--project-color);
+}
+
+.primaryButton:hover {
+  background: var(--text-primary);
+  border-color: var(--text-primary);
+}
+
+/* Card Hover Effects */
+.projectCard:hover .cardDoor {
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2);
+}
+
+[data-theme='dark'] .projectCard:hover .cardDoor {
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+}
+
+/* Shimmer Effect */
+.cardDoor::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  background-size: 200% 100%;
+  animation: shimmerWave 3s infinite;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  border-radius: 20px;
+  z-index: 3;
+}
+
+.projectCard:hover .cardDoor::after {
+  opacity: 1;
+}
+
+@keyframes shimmerWave {
+  0% {
+    background-position: -200% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .projectCard {
+    width: 350px;
+    height: 320px; /* Reduced default height */
+  }
+
+  .projectCard:hover {
+    height: 580px; /* Full height on hover */
+  }
+
+  .cardContent {
+    height: 580px; /* Fixed content height */
+  }
+
+  .projectsGrid {
+    gap: 30px;
+  }
+}
+
+@media (max-width: 992px) {
+  .projectsTitle {
+    font-size: 3.5rem;
+  }
+
+  .projectCard {
+    width: 320px;
+    height: 300px; /* Reduced default height */
+  }
+
+  .projectCard:hover {
+    height: 560px; /* Full height on hover */
+  }
+
+  .cardContent {
+    height: 560px; /* Fixed content height */
+  }
+
+  .doorContent,
+  .cardContent {
+    padding: 25px;
+  }
+}
+
+@media (max-width: 768px) {
+  .projectsSection {
+    padding: 80px 20px;
+  }
+
+  .projectsTitle {
+    font-size: 2.8rem;
+  }
+
+  .projectsSubtitle {
+    font-size: 1.2rem;
+  }
+
+  .projectsControls {
+    margin-bottom: 40px;
+  }
+
+  .scrollButton {
+    width: 50px;
+    height: 50px;
+  }
+
+  .projectCard {
+    width: 300px;
+    height: 280px; /* Reduced default height */
+  }
+
+  .projectCard:hover {
+    height: 520px; /* Full height on hover */
+  }
+
+  .cardContent {
+    height: 520px; /* Fixed content height */
+  }
+
+  .projectsGrid {
+    gap: 20px;
+    padding: 0 10px;
+  }
+
+  .projectImage {
+    height: 120px; /* Smaller on mobile */
+  }
+
+  .projectTitle {
+    font-size: 1.3rem;
+  }
+
+  .contentTitle {
+    font-size: 1.2rem;
+  }
+
+  .actionButton {
+    padding: 12px 14px; /* Maintained good padding */
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .projectsTitle {
+    font-size: 2.2rem;
+  }
+
+  .projectCard {
+    width: 280px;
+    height: 260px; /* Reduced default height */
+  }
+
+  .projectCard:hover {
+    height: 500px; /* Full height on hover */
+  }
+
+  .cardContent {
+    height: 500px; /* Fixed content height */
+  }
+
+  .doorContent,
+  .cardContent {
+    padding: 20px;
+  }
+
+  .projectImage {
+    height: 100px; /* Even smaller on small mobile */
+    margin-bottom: 12px;
+  }
+
+  .projectTitle {
+    font-size: 1.2rem;
+  }
+
+  .projectDescription,
+  .contentDescription {
+    font-size: 0.8rem; /* Smaller text */
+  }
+
+  .featureItem {
+    font-size: 0.7rem; /* Even smaller features */
+  }
+
+  .actionButton {
+    padding: 10px 12px; /* Good padding maintained */
+    font-size: 0.75rem;
+    gap: 6px;
+  }
+
+  .actionButton svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  /* Simplify animations on mobile */
+  .matrixColumn,
+  .floatingDevice,
+  .circuitLine,
+  .glowingOrb {
+    display: none;
+  }
+}
+
+/* Performance optimizations */
+@media (prefers-reduced-motion: reduce) {
+  .matrixColumn,
+  .floatingDevice,
+  .circuitLine,
+  .glowingOrb,
+  .cardDoor::after {
+    animation: none;
+  }
+
+  .doorVariants,
+  .contentVariants {
+    transition: none;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .matrixColumn,
+  .floatingDevice,
+  .circuitLine,
+  .glowingOrb {
+    opacity: 0.3;
+  }
+
+  .projectCard,
+  .cardDoor,
+  .cardContent {
+    border: 2px solid var(--border-color);
+  }
+
+  .actionButton {
+    border: 2px solid var(--text-primary);
+  }
+}
