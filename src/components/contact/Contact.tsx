@@ -2,6 +2,7 @@
 
 import React, { useState, useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
+import emailjs from '@emailjs/browser'
 import {
   Send,
   Mail,
@@ -24,6 +25,19 @@ const Contact: React.FC = () => {
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [isSubmitted, setIsSubmitted] = useState(false)
+  const [submitError, setSubmitError] = useState('')
+
+  // const EMAILJS_CONFIG = {
+  //   serviceId: 'YOUR_SERVICE_ID', // Replace with your Service ID
+  //   templateId: 'YOUR_TEMPLATE_ID', // Replace with your Template ID
+  //   publicKey: 'YOUR_PUBLIC_KEY', // Replace with your Public Key
+  // }
+
+  const EMAILJS_CONFIG = {
+    serviceId: process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+    templateId: process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
+    publicKey: process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!,
+  }
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -37,18 +51,63 @@ const Contact: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    console.log('Form data:', formData)
+    console.log('EmailJS Config:', EMAILJS_CONFIG)
     setIsSubmitting(true)
+    setSubmitError('')
 
-    // Simulate form submission
-    setTimeout(() => {
-      setIsSubmitting(false)
+    try {
+      // EmailJS template parameters
+      const templateParams = {
+        name: formData.name,
+        email: formData.email,
+        subject: formData.subject,
+        message: formData.message,
+        to_email: 'tutortaquee123@gmail.com', // Your receiving email
+        reply_to: formData.email,
+      }
+
+      // Send email using EmailJS
+      const result = await emailjs.send(
+        EMAILJS_CONFIG.serviceId,
+        EMAILJS_CONFIG.templateId,
+        templateParams,
+        EMAILJS_CONFIG.publicKey
+      )
+
+      console.log('Email sent successfully:', result.text)
+
+      // Success state
       setIsSubmitted(true)
       setFormData({ name: '', email: '', subject: '', message: '' })
 
-      // Reset success message after 3 seconds
-      setTimeout(() => setIsSubmitted(false), 3000)
-    }, 2000)
+      // Reset success message after 5 seconds
+      setTimeout(() => setIsSubmitted(false), 5000)
+    } catch (error) {
+      console.error('Email sending failed:', error)
+      setSubmitError('Failed to send message. Please try again.')
+
+      // Reset error message after 5 seconds
+      setTimeout(() => setSubmitError(''), 5000)
+    } finally {
+      setIsSubmitting(false)
+    }
   }
+
+  // const handleSubmit = async (e: React.FormEvent) => {
+  //   e.preventDefault()
+  //   setIsSubmitting(true)
+
+  //   // Simulate form submission
+  //   setTimeout(() => {
+  //     setIsSubmitting(false)
+  //     setIsSubmitted(true)
+  //     setFormData({ name: '', email: '', subject: '', message: '' })
+
+  //     // Reset success message after 3 seconds
+  //     setTimeout(() => setIsSubmitted(false), 3000)
+  //   }, 2000)
+  // }
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -316,6 +375,44 @@ const Contact: React.FC = () => {
                   />
                 </div>
 
+                {/* Success Message */}
+                {isSubmitted && (
+                  <motion.div
+                    className={styles.successMessage}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    style={{
+                      background: '#10b981',
+                      color: 'white',
+                      padding: '15px',
+                      borderRadius: '8px',
+                      textAlign: 'center',
+                      marginBottom: '20px',
+                    }}
+                  >
+                    ✅ Message sent successfully! I'll get back to you soon.
+                  </motion.div>
+                )}
+
+                {/* Error Message */}
+                {submitError && (
+                  <motion.div
+                    className={styles.errorMessage}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    style={{
+                      background: '#ef4444',
+                      color: 'white',
+                      padding: '15px',
+                      borderRadius: '8px',
+                      textAlign: 'center',
+                      marginBottom: '20px',
+                    }}
+                  >
+                    ❌ {submitError}
+                  </motion.div>
+                )}
+
                 <motion.button
                   type="submit"
                   className={styles.submitButton}
@@ -341,22 +438,6 @@ const Contact: React.FC = () => {
                   )}
                 </motion.button>
               </form>
-
-              {/* Contact Info */}
-              {/* <div className={styles.contactInfo}>
-                <div className={styles.contactItem}>
-                  <Mail className="w-5 h-5" />
-                  <span>basharat.taquee@gmail.com</span>
-                </div>
-                <div className={styles.contactItem}>
-                  <Phone className="w-5 h-5" />
-                  <span>+91 9876543210</span>
-                </div>
-                <div className={styles.contactItem}>
-                  <MapPin className="w-5 h-5" />
-                  <span>Pune, Maharashtra, India</span>
-                </div>
-              </div> */}
             </div>
           </motion.div>
 
