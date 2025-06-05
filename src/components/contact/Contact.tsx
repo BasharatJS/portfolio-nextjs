@@ -27,17 +27,17 @@ const Contact: React.FC = () => {
   const [isSubmitted, setIsSubmitted] = useState(false)
   const [submitError, setSubmitError] = useState('')
 
-  // const EMAILJS_CONFIG = {
-  //   serviceId: 'YOUR_SERVICE_ID', // Replace with your Service ID
-  //   templateId: 'YOUR_TEMPLATE_ID', // Replace with your Template ID
-  //   publicKey: 'YOUR_PUBLIC_KEY', // Replace with your Public Key
-  // }
-
   const EMAILJS_CONFIG = {
-    serviceId: process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
-    templateId: process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
-    publicKey: process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!,
+    serviceId: 'service_r5yutfo', // Replace with your Service ID
+    templateId: 'template_53vsb4j', // Replace with your Template ID
+    publicKey: 'J6AN7nRS6oL4iv5Ff', // Replace with your Public Key
   }
+
+  // const EMAILJS_CONFIG = {
+  //   serviceId: process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID!,
+  //   templateId: process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID!,
+  //   publicKey: process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY!,
+  // }
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
