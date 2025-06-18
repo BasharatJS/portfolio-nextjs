@@ -13,7 +13,7 @@ const Experience: React.FC = () => {
     {
       id: 1,
       role: 'Lead Frontend Developer',
-      company: 'Evonnexis',
+      company: 'Evonnexis Pvt Ltd.',
       location: 'Pune, India (Remote)',
       period: '01/2025 to Current',
       duration: 'Current',
@@ -59,7 +59,7 @@ const Experience: React.FC = () => {
     {
       id: 3,
       role: 'React Native Developer',
-      company: 'Appventurez Mobitech Pvt Ltd',
+      company: 'Appventurez Mobitech Pvt Ltd.',
       location: 'Noida, India',
       period: '07/2022 to 06/2023',
       duration: '1 Year',
